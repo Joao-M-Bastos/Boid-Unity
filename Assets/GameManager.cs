@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
             compute.Dispatch(0, threadGroups, 1, 1);
             
-
             boidBuffer.GetData(boidData);
 
             for (int i = 0; i < boids.Length; i++)
