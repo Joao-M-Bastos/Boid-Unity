@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
 
     public ComputeShader compute;
     Boid[] boids;
-    
+
+    double lastFrame;
+
+
     void Start()
     {
         boids = FindObjectsOfType<Boid>();
@@ -19,6 +22,8 @@ public class GameManager : MonoBehaviour
     {
         if (boids != null)
         {
+            
+
             int numBoids = boids.Length;
             BoidData[] boidData = new BoidData[numBoids];
 
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour
                 boidData[i].direction = boids[i].transform.forward;
             }
 
-            var boidBuffer = new ComputeBuffer(numBoids, sizeof(float) * 3 * 5 + sizeof(int));
+            ComputeBuffer boidBuffer = new ComputeBuffer(numBoids, sizeof(float) * 3 * 5 + sizeof(int));
             boidBuffer.SetData(boidData);
 
             compute.SetBuffer(0, "boids", boidBuffer);
@@ -53,6 +58,14 @@ public class GameManager : MonoBehaviour
             }
 
             boidBuffer.Release();
+
+            double thisFrame = Time.time;
+
+            double speedUp = thisFrame -lastFrame;
+
+            Debug.Log(speedUp);
+
+            lastFrame = thisFrame;
         }
     }
 

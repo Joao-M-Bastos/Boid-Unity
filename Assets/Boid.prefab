@@ -50,9 +50,9 @@ MonoBehaviour:
   perceptionRadius: 2
   avoidanceRadius: 1
   maxSteerForce: 5
-  alignWeight: 2
+  alignWeight: 1
   cohesionWeight: 1
-  seperateWeight: 2.5
+  seperateWeight: 1
   targetWeight: 1
   avgFlockHeading: {x: 0, y: 0, z: 0}
   avgAvoidanceHeading: {x: 0, y: 0, z: 0}

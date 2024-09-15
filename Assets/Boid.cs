@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Boid : MonoBehaviour
 {
-
     public float minSpeed = 2;
     public float maxSpeed = 5;
 

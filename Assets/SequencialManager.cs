@@ -12,6 +12,8 @@ public class SequencialManager : MonoBehaviour
         boids = FindObjectsOfType<Boid>();
     }
 
+    double lastFrame;
+
     private void Update()
     {
         if (boids != null)
@@ -30,21 +32,29 @@ public class SequencialManager : MonoBehaviour
                         Boid neighborBoid = boids[j];
                         Vector3 distance = neighborBoid.transform.position - boids[j].transform.position;
 
-                        if (distance.magnitude < boids[i].perceptionRadius)
+                        if (distance.magnitude < boids[0].perceptionRadius)
                         {
                             boids[i].numPerceivedFlockmates += 1;
                             boids[i].avgFlockHeading += neighborBoid.transform.forward;
                             boids[i].centreOfFlockmates += neighborBoid.transform.position;
 
-                            if (distance.magnitude < boids[i].avoidanceRadius)
+                            if (distance.magnitude < boids[0].avoidanceRadius)
                             {
-                                boids[i].avgAvoidanceHeading -= distance / distance.magnitude;
+                                boids[i].avgAvoidanceHeading -= distance * distance.magnitude;
                             }
                         }
                     }
                 }
                 boids[i].UpdateBoid();
             }
+
+            double thisFrame = Time.time;
+
+            double speedUp = thisFrame - lastFrame;
+
+            Debug.Log(speedUp);
+
+            lastFrame = thisFrame;
         }
     }
 }
